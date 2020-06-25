@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Página Principal
+{% endblock %}
+
+{% block content %}
+<div class="separador ">
+  <h1>Preguntas Recientes</h1>
+  <div class=" mr-4">
+
+    {% for question in questions %}
+
+    <div class="border rounded mt-2 f">
+      <div class="margin">Pregunta de: <a
+          href="{% url 'publicProfile' question.id_User.id %}">{{ question.id_User }}</a>
+      </div>
+      <div class="margin">Fecha de publicación: {{ question.publication_date }}
+      </div>
+      <div class="margin">Categoria: {{ question.category }}
+      </div>
+      <div class="margin">
+        <h2>{{ question.question }}</h2>
+      </div>
+      <div style="width: 100%;padding-left: 3%;"><h5>Respuestas:</h5> </div>
+        {% for answer in answers %}
+        {% if answer.id_question == question %}
+        <div style="width: 100%;padding-left: 5%; border-top: 3px;background-color:azure;">{{ answer }}</div>
+        {% endif %}
+        {% endfor %}
+      <a href="{% url 'answerQuestion' question.id %}" class="btn btn-success float">Responder</a>
+
+    </div>
+    {% endfor %}
+    {% if cantidad == 0 %}
+    <h1>No se encontró ninguna pregunta.</h1> 
+    {% endif %}
+  </div>
+</div>
+<style>
+  .separador {
+    margin-top: 1%;
+    margin-left: 15%;
+  }
+
+  .f {
+    width: 77%;
+  }
+
+  .float {
+    width: 30%;
+    margin-left: 55%;
+  }
+
+  .margin {
+    margin-top: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+</style>
+{% endblock %}

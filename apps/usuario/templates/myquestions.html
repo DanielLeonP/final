@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Mis Preguntas
+{% endblock %}
+
+{% block content %}
+<div class="separador ">
+    <h4> Cantidad de preguntas:{{ cantidad}} </h4>
+    <div class="table mr-4">
+  
+        {% for pregunta in questions %}
+  
+      <div class="border rounded mt-2 f">
+        <div class="margin">Categoria: {{ pregunta.category }}
+        </div>
+        <div class="margin">Fecha de Publicacion: {{ pregunta.publication_date }}
+  
+        </div>
+        <div class="margin">
+            <h2>Pregunta: {{ pregunta.question }}</h2>
+        </div>
+          <!-- {% for answer in answers %}
+            {% if answer.id_answer == question.id %}
+            <h2>{{ answer.answer }}</h2>
+            {% endif %}
+          {% endfor %} -->
+          <div class="margin  "><a href="{% url 'deleteQuestion' pregunta.id %}"
+            class="btn btn-danger eliminar">Eliminar</a>
+            <a href="{% url 'answerMyQuestion' pregunta.id %}" class="btn btn-success ">Ver
+                Respuestas</a>
+        </div>
+
+        
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <style>
+    .error {
+        color: red;
+    }
+
+    .success {
+        color: green;
+    }
+
+    .warning {
+        color: orangered;
+    }
+
+    .info {
+        color: blue;
+    }
+    .separador {
+      margin-top: 1%;
+      margin-left: 15%;
+    }
+    .f{
+      width: 77%;
+    }
+    .float{
+      width: 30%;
+      margin-left: 55%;
+    }
+    .margin{
+      margin-top: 1%;
+      margin-left: 3%;
+      margin-right: 3%;
+    }
+    .eliminar{
+        margin-left: 70%;
+    }
+  </style>
+{% endblock %}

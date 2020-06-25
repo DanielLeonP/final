@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Respuestas a mis Preguntas
+{% endblock %}
+
+{% block content %}
+<div class="separador ">
+    <h4>{{ question }}</h4>
+    <table class="table">
+        <tr>
+            <th>Author de Respuesta</th>
+            <th>Fecha de Respuesta</th>
+            <th>Respuesta</th>
+        </tr>
+        {% for answer in answers %}
+        <tr>
+            <td>{{ answer.id_answer }}</td>
+            <td>{{ answer.response_time }}</td>
+            <td>{{ answer.answer }}</td>            
+            
+        </tr>
+        {% endfor %}        
+    </table>
+</div>
+
+{% endblock %}

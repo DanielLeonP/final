@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Perfil
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+
+        <div class="col-sm-12 col-md-6 ">
+            <h1>Mi perfil</h1>
+            <img src="{{ profile.avatar.url }}"  style="width: 25%; margin-left: 37%;"  >
+            <h3 style="margin-left: 5%; width: 90%; margin-right: 5%;">{{ profile }}</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+
+                {% for field in form %}
+                <div class="form group">
+                    {% csrf_token %}
+                    {{ field.label_tag }}
+                    {{ field|add_class:"form-control" }}
+
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important:
+                        {% endif %}
+                        {{ message }}
+                    </li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <input type="submit" value="Guardar cambios" class="btn btn-outline-primary btn-block mt-2">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
